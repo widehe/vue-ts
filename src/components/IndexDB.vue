@@ -1,11 +1,11 @@
 <template>
     <div class="indexdb">
         <button @click="add">写入数据</button>
-        <button>更新数据</button>
         <button @click="readAll">读取数据</button>
         <div class="show">
-            <span v-for="(item, i) in data" :key="i">{{item.id}}---{{item.name}}---{{item.age}}
+            <span v-for="(item, i) in data" :key="i">{{item.id}}-{{item.name}}-{{item.age}}
                 <button @click="del(item.id)">删除</button>
+                <button @click="update(item.id)">修改数据</button>-----------
             </span>
         </div>
     </div>
@@ -58,7 +58,7 @@ export default class App extends Vue {
         let req: any = this.db.transaction('person').objectStore('person');
         this.data = []
          req.openCursor().onsuccess =  (e: any) => {
-            var cursor = e.target.result;
+            let cursor = e.target.result;
 
             if (cursor) {
                 this.data.push(cursor.value)
@@ -78,10 +78,10 @@ export default class App extends Vue {
             console.log('数据删除成功');
         };
     }
-    update() {
-         var req = this.db.transaction(['person'], 'readwrite')
+    update(id: number) {
+        let req = this.db.transaction(['person'], 'readwrite')
             .objectStore('person')
-            .put({ id: 1, name: '李四', age: 35, email: 'lisi@example.com' });
+            .put({ id, name: '王祖贤', age: Math.random() });
 
         req.onsuccess =  () => {
             this.readAll();
@@ -99,6 +99,7 @@ export default class App extends Vue {
         
         //新增数据库
         request.onupgradeneeded = (e: any) => {
+            //获取实例
             this.db = e.target.result;
             //先判断是否存在改数据库 
             if (!this.db.objectStoreNames.contains('person')) {
