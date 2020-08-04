@@ -5,6 +5,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <IndexDB></IndexDB>
     <Decorator propA="200" @emitFunc="emitFunc"></Decorator>
+    <Loading></Loading>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import HelloWorld from './components/HelloWorld.vue'
 import IndexDB from "./components/IndexDB.vue"
 import Decorator from "./components/Decorator.vue"
+import Loading from "./components/Loading.vue"
 import { Vue, Component, Provide } from 'vue-property-decorator'
 //枚举
 enum MyModel {
@@ -26,7 +28,7 @@ interface MyObj {
 }
 //组件装饰器
 @Component({
-    components: { HelloWorld, IndexDB, Decorator }
+    components: { HelloWorld, IndexDB, Decorator, Loading }
 })
 export default class App extends Vue {
   name:string = 'App' 

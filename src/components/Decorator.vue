@@ -1,6 +1,7 @@
 <template>
     <div class="decorator">装饰器模式
         <p>{{ bar }}</p>
+        <span>{{ calNumber }}</span>
     </div>
     
 </template>
@@ -13,6 +14,7 @@ import { Vue, Component, Prop, Watch, Emit, Inject   } from 'vue-property-decora
 @Component({})
 export default class App extends Vue {
     testWatchVal: number = 0
+    index: number = 10
 
     @Inject("bar") bar:any
 
@@ -24,9 +26,17 @@ export default class App extends Vue {
     test(a:number, b:number) {
         return a + b
     }
+
     go() {
         console.log(this.propA)
     }
+    //computed 的用法  get/set
+    get calNumber() {
+        return this.index * 2
+    }
+    // set calNumber(val) {
+    //     console.log("--->",val)
+    // }
  
     @Emit("emitFunc")
     toStr():string{
