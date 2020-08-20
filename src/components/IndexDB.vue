@@ -2,6 +2,7 @@
     <div class="indexdb">
         <button @click="add">写入数据</button>
         <button @click="readAll">读取数据</button>
+        <button @click="() => $router.push('/param/1314520/20')">路由跳转</button>
         <div class="show">
             <span v-for="(item, i) in data" :key="i">{{item.id}}-{{item.name}}-{{item.age}}
                 <button @click="del(item.id)">删除</button>

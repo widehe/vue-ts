@@ -6,6 +6,7 @@
     <IndexDB></IndexDB>
     <Decorator propA="200" @emitFunc="emitFunc"></Decorator>
     <Loading></Loading>
+    <router-view />
   </div>
 </template>
 
