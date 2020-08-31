@@ -7,11 +7,74 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
+  <style type="text/css">
+    #no-script > svg {
+      animation: rotate 1s linear infinite;
+    }
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <div
+      style="position:absolute;text-align:center;padding-top:15%;z-index:-100;left:0;right:0;"
+      id="no-script"
+    >
+      <svg
+        t="1579083925309"
+        class="icon"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="1187"
+        width="50"
+        height="50"
+      >
+        <path
+          d="M204.8 204.8m-204.8 0a204.8 204.8 0 1 0 409.6 0 204.8 204.8 0 1 0-409.6 0Z"
+          fill="#5BBE98"
+          p-id="1188"
+          fill-opacity="1"
+        ></path>
+        <path
+          d="M819.2 204.8m-204.8 0a204.8 204.8 0 1 0 409.6 0 204.8 204.8 0 1 0-409.6 0Z"
+          fill="#5BBE98"
+          fill-opacity="0.6"
+          p-id="1189"
+        ></path>
+        <path
+          d="M819.2 819.2m-204.8 0a204.8 204.8 0 1 0 409.6 0 204.8 204.8 0 1 0-409.6 0Z"
+          fill="#5BBE98"
+          fill-opacity="0.4"
+          p-id="1190"
+        ></path>
+        <path
+          d="M204.8 819.2m-204.8 0a204.8 204.8 0 1 0 409.6 0 204.8 204.8 0 1 0-409.6 0Z"
+          fill="#5BBE98"
+          fill-opacity="0.2"
+          p-id="1191"
+        ></path>
+      </svg>
+    </div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
+<script>
+   /* 去掉首屏加载laoding */
+   window.onload = function() {
+    const root = document.getElementById('app')
+    const noScript = document.getElementById('no-script')
+    if (root.innerHTML !== '') {
+      // setTimeout(() => {
+        noScript.style.display = 'none'
+      // }, 1000)
+      
+    }
+  }
+</script>

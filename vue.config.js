@@ -1,10 +1,18 @@
 const path = require("path");
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const isProd = process.env.NODE_ENV === "production";
+//导入速度分析插件
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
+
+//实例化插件
+// const smp = new SpeedMeasurePlugin()
+//导入体积分析插件
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 function resolve(dir) {
   return path.join(__dirname, ".", dir);
 }
+
 
 module.exports = {
   publicPath: "./",
@@ -37,10 +45,11 @@ module.exports = {
   ],
 
   // 是否为生产环境构建生成 source map？
-  productionSourceMap: true,
+  productionSourceMap: false,
 
   // 调整内部的 webpack 配置。
   // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/webpack.md
+  
   configureWebpack: config => {
     let e = ['@babel/polyfill', './src/main.ts']
     config.entry = e
@@ -51,7 +60,8 @@ module.exports = {
           test: /\.js$|\.html$|\.css$/,
           //超过4kb 压缩
           threshold: 4096
-        })
+        }),
+        // new BundleAnalyzerPlugin()
       )
     } 
     config.resolve = { extensions: [".ts", ".tsx", ".js", ".json"], alias: {
@@ -65,7 +75,6 @@ module.exports = {
         appendTsSuffixTo: [/\.vue$/],    
       }    
     })
-   
   },
   chainWebpack: config => {
      //打包编译后的 文件名称  【模块名称.版本号.时间戳】
@@ -147,10 +156,5 @@ module.exports = {
     //     changeOrigin: true
     //   }
     // }
-  },
-
-  // 三方插件的选项
-  pluginOptions: {
-    // ...
   }
 }
